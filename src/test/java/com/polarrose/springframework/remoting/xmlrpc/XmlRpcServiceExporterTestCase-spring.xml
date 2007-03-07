@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+  <bean id="helloService" class="com.polarrose.xmlrpc.HelloServiceImpl"/>
+
+  <bean name="/RPC2" class="com.polarrose.springframework.remoting.xmlrpc.XmlRpcServiceExporter">
+    <property name="namespace" value="helloService"/>
+    <property name="service" ref="helloService"/>
+    <property name="serviceInterface" value="com.polarrose.xmlrpc.HelloService"/>
+  </bean>
+
+</beans>
