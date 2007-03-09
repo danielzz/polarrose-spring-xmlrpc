@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 import com.polarrose.xmlrpc.handlers.ReflectiveInvocationHandler;
 
 /**
@@ -42,6 +44,23 @@ import com.polarrose.xmlrpc.handlers.ReflectiveInvocationHandler;
 
 public class XmlRpcServer
 {
+    /**
+     * Thread local to store the current request id.
+     */
+
+    private static final ThreadLocal<String> currentRequestId = new ThreadLocal<String>();
+
+    /**
+     * Return the current request id. The request id is a unique string.
+     *
+     * @return the current request id.
+     */
+
+    public static String getCurrentRequestId()
+    {
+        return currentRequestId.get();
+    }
+
     /**
      *  Default constructor using default serializer supporting the basic types as well
      *  the custom serializers.
@@ -64,7 +83,6 @@ public class XmlRpcServer
         this.serializer = serializer;
     }
 
-
     /**
      *  Dispatches the call contained in the supplied input stream. The stream should contain
      *  a proper XML message conforming to the XML-RPC specification.
@@ -79,8 +97,20 @@ public class XmlRpcServer
 
     public void execute( InputStream xmlInput, Writer output ) throws XmlRpcException
     {
-        XmlRpcDispatcher dispatcher = new XmlRpcDispatcher( this, "(unknown)" );
-        dispatcher.dispatch( xmlInput, output );
+        // Set the current request id
+
+        if (currentRequestId.get() != null) {
+            throw new IllegalStateException("Request id is already set");
+        }
+
+        currentRequestId.set(UUID.randomUUID().toString());
+
+        try {
+            XmlRpcDispatcher dispatcher = new XmlRpcDispatcher( this, "(unknown)" );
+            dispatcher.dispatch( xmlInput, output );
+        } finally {
+            currentRequestId.remove();
+        }
     }
 
 
