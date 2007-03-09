@@ -1,5 +1,8 @@
 package com.polarrose.xmlrpc;
 
+import java.util.List;
+import java.util.Arrays;
+
 public class ComplexServiceImpl implements ComplexService
 {
     public String concatManyTimes(int n, String... strings)
@@ -25,5 +28,20 @@ public class ComplexServiceImpl implements ComplexService
         }
 
         return result;
+    }
+
+    public List<String> returnManyStringsAsList()
+    {
+        return Arrays.asList("Hallo", "Boppers");
+    }
+
+    public String[] returnManyStringsAsArray()
+    {
+        return new String[] { "Amsterdam", "Toronto" };
+    }
+
+    public List<String> returnListWithNullItem()
+    {
+        return Arrays.asList("Hallo", null, "Boppers");
     }
 }
