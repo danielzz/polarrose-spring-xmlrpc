@@ -12,6 +12,7 @@ import org.mortbay.jetty.servlet.ServletHolder;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
 
 public class XmlRpcServletTestCase extends TestCase
 {
@@ -122,5 +123,17 @@ public class XmlRpcServletTestCase extends TestCase
             15,
             complexService.addManyInts(1, 2, 3, 4, 5)
         );
+
+//        String[] stringArray = complexService.returnManyStringsAsArray();
+//        assertNotNull(stringArray);
+//        assertEquals(2, stringArray.length);
+
+        List<String> stringList = complexService.returnManyStringsAsList();
+        assertNotNull(stringList);
+        assertEquals(2, stringList.size());
+
+//        List<String> listWithNullItem = complexService.returnListWithNullItem();
+//        assertNotNull(listWithNullItem);
+//        assertEquals(3, listWithNullItem.size());
     }
 }
