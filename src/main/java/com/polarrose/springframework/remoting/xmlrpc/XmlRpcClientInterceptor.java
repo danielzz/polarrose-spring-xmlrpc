@@ -16,17 +16,16 @@
 
 package com.polarrose.springframework.remoting.xmlrpc;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.lang.reflect.InvocationTargetException;
-
+import com.polarrose.xmlrpc.XmlRpcProxy;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.springframework.remoting.support.UrlBasedRemoteAccessor;
 import org.springframework.remoting.RemoteLookupFailureException;
 import org.springframework.remoting.RemoteProxyFailureException;
+import org.springframework.remoting.support.UrlBasedRemoteAccessor;
 
-import com.polarrose.xmlrpc.XmlRpcProxy;
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Interceptor for accessing an XmlRpc service.

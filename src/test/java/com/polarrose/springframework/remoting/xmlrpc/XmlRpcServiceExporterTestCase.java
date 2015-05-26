@@ -16,28 +16,23 @@
 
 package com.polarrose.springframework.remoting.xmlrpc;
 
-import javax.servlet.ServletContext;
-import java.net.URL;
-import java.net.MalformedURLException;
-
+import com.polarrose.xmlrpc.HelloService;
+import com.polarrose.xmlrpc.XmlRpcProxy;
 import junit.framework.TestCase;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.servlet.Context;
-import org.mortbay.jetty.servlet.ServletHolder;
-import org.mortbay.jetty.servlet.ServletHandler;
-import org.mortbay.jetty.servlet.ServletMapping;
-import org.mortbay.jetty.bio.SocketConnector;
-import org.mortbay.xml.XmlConfiguration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.web.context.ContextLoaderServlet;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.bio.SocketConnector;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.servlet.ServletMapping;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.polarrose.xmlrpc.XmlRpcServlet;
-import com.polarrose.xmlrpc.HelloService;
-import com.polarrose.xmlrpc.XmlRpcProxy;
+import javax.servlet.ServletContext;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class XmlRpcServiceExporterTestCase extends TestCase
 {
@@ -52,11 +47,11 @@ public class XmlRpcServiceExporterTestCase extends TestCase
 
         server = new Server();
         server.setConnectors(new Connector[]{connector});
-        server.start();
 
-        Context root = new Context(server, "/", Context.SESSIONS);
+        ServletContextHandler root = new ServletContextHandler(server, "/", ServletContextHandler.SESSIONS);
 
         ServletHandler servletHandler = root.getServletHandler();
+        root.start();
 
         ServletContext servletContext = servletHandler.getServletContext();
 
@@ -75,6 +70,8 @@ public class XmlRpcServiceExporterTestCase extends TestCase
         servletMapping.setServletName("remoting");
         servletMapping.setPathSpec("/*");
         servletHandler.addServletMapping(servletMapping);
+
+        server.start();
     }
 
     @Override

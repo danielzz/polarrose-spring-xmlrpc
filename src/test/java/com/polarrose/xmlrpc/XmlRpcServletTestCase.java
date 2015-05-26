@@ -3,11 +3,11 @@
 package com.polarrose.xmlrpc;
 
 import junit.framework.TestCase;
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.bio.SocketConnector;
-import org.mortbay.jetty.servlet.Context;
-import org.mortbay.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.bio.SocketConnector;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,7 +33,7 @@ public class XmlRpcServletTestCase extends TestCase
 
         server = new Server();
         server.setConnectors(new Connector[]{connector});
-        Context context = new Context(server, "/", Context.SESSIONS);
+        ServletContextHandler context = new ServletContextHandler(server, "/", ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(xmlRpcServlet), "/RPC2");
         server.start();
     }

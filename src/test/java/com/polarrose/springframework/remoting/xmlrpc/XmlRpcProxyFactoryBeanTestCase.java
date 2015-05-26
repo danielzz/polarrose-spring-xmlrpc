@@ -16,23 +16,22 @@
 
 package com.polarrose.springframework.remoting.xmlrpc;
 
-import javax.servlet.ServletContext;
-import java.net.URL;
-import java.net.MalformedURLException;
-
+import com.polarrose.xmlrpc.HelloService;
 import junit.framework.TestCase;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.servlet.Context;
-import org.mortbay.jetty.servlet.ServletHandler;
-import org.mortbay.jetty.servlet.ServletHolder;
-import org.mortbay.jetty.servlet.ServletMapping;
-import org.mortbay.jetty.bio.SocketConnector;
-import org.springframework.web.context.support.GenericWebApplicationContext;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.bio.SocketConnector;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.servlet.ServletMapping;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.polarrose.xmlrpc.HelloService;
+import javax.servlet.ServletContext;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class XmlRpcProxyFactoryBeanTestCase extends TestCase
 {
@@ -48,9 +47,9 @@ public class XmlRpcProxyFactoryBeanTestCase extends TestCase
 
         server = new Server();
         server.setConnectors(new Connector[]{connector});
-        server.start();
 
-        Context root = new Context(server, "/", Context.SESSIONS);
+        ServletContextHandler root = new ServletContextHandler(server, "/", ServletContextHandler.SESSIONS);
+        root.start();
 
         ServletHandler servletHandler = root.getServletHandler();
 
@@ -72,6 +71,8 @@ public class XmlRpcProxyFactoryBeanTestCase extends TestCase
         servletMapping.setServletName("remoting");
         servletMapping.setPathSpec("/*");
         servletHandler.addServletMapping(servletMapping);
+
+        server.start();
     }
 
     @Override

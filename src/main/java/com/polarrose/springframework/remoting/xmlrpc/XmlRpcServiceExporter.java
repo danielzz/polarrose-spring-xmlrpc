@@ -16,18 +16,17 @@
 
 package com.polarrose.springframework.remoting.xmlrpc;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
+import com.polarrose.xmlrpc.XmlRpcServer;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.remoting.support.RemoteExporter;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.servlet.support.WebContentGenerator;
 
-import com.polarrose.xmlrpc.XmlRpcServer;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author Stefan Arentz <stefan@polarrose.com>
