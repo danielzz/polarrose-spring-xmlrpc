@@ -7,7 +7,7 @@
   <groupId>com.polarrose</groupId>
   <artifactId>spring-remoting-xmlrpc</artifactId>
   <packaging>jar</packaging>
-  <version>2.0-SNAPSHOT</version>
+  <version>1.5-SNAPSHOT</version>
 
   <name>Spring XML-RPC Remoting</name>
 
@@ -57,17 +57,17 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>3.2.13.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>3.2.13.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>3.2.13.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -78,7 +78,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>3.2.13.RELEASE</version>
       <scope>test</scope>
     </dependency>
     <dependency>
